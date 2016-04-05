@@ -39,15 +39,15 @@
                              targetProject="./src/main/java" type="XMLMAPPER" >
         </javaClientGenerator>
         <!--    用户模块    -->
-        <table tableName="cd_category" />
-		<table tableName="cd_company"/>
-		<table tableName="cd_contract"/>
-		<table tableName="cd_coupon"/>
+<!--         <table tableName="cd_category" /> -->
+<!-- 		<table tableName="cd_company"/> -->
+<!-- 		<table tableName="cd_contract"/> -->
+<!-- 		<table tableName="cd_coupon"/> -->
 		<table tableName="cd_coupon_ref"/>
-		<table tableName="cd_item"/>
-		<table tableName="cd_item_contract_item"/>
-		<table tableName="cd_item_ref"/>
-		<table tableName="cd_manager_company"/>
-		<table tableName="cd_member"/>
+<!-- 		<table tableName="cd_item"/> -->
+<!-- 		<table tableName="cd_item_contract_item"/> -->
+<!-- 		<table tableName="cd_item_ref"/> -->
+<!-- 		<table tableName="cd_manager_company"/> -->
+<!-- 		<table tableName="cd_member"/> -->
     </context>
 </generatorConfiguration>
