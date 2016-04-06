@@ -99,15 +99,23 @@ define(function () {
     }]);
 
     ngREST.factory("MemberAPI", ["$resource", function($resource){
-        return $resource("/member/:memberId", { id:"@id" }, {
+        return $resource("/member/:id", { id:"@id" }, {
             query:{ isArray:false},
             update:{method:"PUT", params:{id:"@id"}}
         });
     }]);
 
     ngREST.factory("CompanyAPI", ["$resource", function($resource){
-        return $resource("/company/:company", { id:"@id" }, {
-            query:{ isArray:false}
+        return $resource("/company/:id", { id:"@id" }, {
+            query:{ isArray:false},
+            update:{method:"PUT", params:{id:"@id"}}
+        });
+    }]);
+
+    ngREST.factory("ItemCategoryAPI", ["$resource", function($resource){
+        return $resource("/itemCategory/:id", { id:"@id" }, {
+            query:{ isArray:false},
+            update:{ method:"PUT", params:{id:"@id"}}
         });
     }]);
 
