@@ -4,17 +4,18 @@ define(function () {
     return ["$scope", "ItemCategoryAPI", "$modal", "$ugDialog", function($scope, ItemCategoryAPI, $modal, $ugDialog){
         $scope.itemCategoryList = [];
         $scope.queryParam = {};
-        $scope.getOrganizationTree = function(){
+        $scope.getItemCategoryTree = function(){
             ItemCategoryAPI.query({
                 id:$scope.queryParam.id
             }, function(data){
+                debugger;
                 $scope.itemCategoryList = data;
             });
         };
         $scope.removeNode = function(item){
-            var msg = "是否删除此组织?";
+            var msg = "是否删除此分类?";
             if(item.nodes && item.nodes.length > 0){
-                msg = "此组织存在下级组织，确认将同步删除此组织所有下级组织，是否删除？"
+                msg = "此分类存在下级分类，确认将同步删除此分类所有下级分类，是否删除？"
             }
             $ugDialog.confirm(msg).then(function(){
                 ItemCategoryAPI.delete({
@@ -54,7 +55,6 @@ define(function () {
                             $scope.organization = {
                                 id:CurrentItemCategory.id,
                                 name:CurrentItemCategory.name,
-                                description:CurrentItemCategory.description,
                                 parentId:CurrentItemCategory.parentId,
                                 parentName:CurrentItemCategory.parentName
                             };

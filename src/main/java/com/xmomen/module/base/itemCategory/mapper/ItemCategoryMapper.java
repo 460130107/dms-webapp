@@ -13,7 +13,7 @@ import com.xmomen.module.base.itemCategory.model.ItemCategoryModel;
  */
 public interface ItemCategoryMapper {
 
-    @Select(value = "SELECT s.ID,s.CATEGORY_NAME, s.PARENT_ID,p.CATEGORY_NAME AS parent_name FROM cd_CATEGORY s LEFT JOIN cd_CATEGORY p ON p.ID=s.PARENT_ID where FIND_IN_SET(s.id, query_children_itemCategory(${id}))")
+    @Select(value = "SELECT s.ID,s.CATEGORY_NAME, s.PARENT_ID,p.CATEGORY_NAME AS parent_name FROM cd_category s LEFT JOIN cd_category p ON p.ID=s.PARENT_ID where FIND_IN_SET(s.id, query_children_category(${id}))")
     @ResultType(ItemCategoryModel.class)
     public List<ItemCategoryModel> getItemCategoryTree(@Param(value = "id") Integer id);
 }

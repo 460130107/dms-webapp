@@ -121,18 +121,10 @@
 							<input class="form-control" required="true" ng-model="itemCategory.name" name="name" placeholder="分类名称" type="text">
 						</div>
 					</div>
-
-					<div class="form-group">
-						<label class="col-md-2 control-label">组织描述</label>
-						<div class="col-md-10">
-							<input class="form-control" required="true" ng-model="itemCategory.description" name="description" placeholder="组织描述" type="text">
-						</div>
-					</div>
-
 					<div class="form-group" ng-if="itemCategory.parentId">
-						<label class="col-md-2 control-label">上级组织</label>
+						<label class="col-md-2 control-label">上级分类</label>
 						<div class="col-md-10">
-							<input class="form-control" ng-model="itemCategory.parentName" readonly name="parentName" placeholder="上级组织" type="text" >
+							<input class="form-control" ng-model="itemCategory.parentName" readonly name="parentName" placeholder="上级分类" type="text" >
 							<input class="form-control" ng-model="itemCategory.parentId" name="parentId" type="hidden" >
 						</div>
 					</div>

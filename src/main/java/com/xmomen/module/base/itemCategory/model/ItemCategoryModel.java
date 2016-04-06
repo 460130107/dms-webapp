@@ -10,7 +10,6 @@ public class ItemCategoryModel implements Serializable {
 
     private Integer id;
     private String name;
-    private String description;
     private Integer parentId;
     private String parentName;
     private List<ItemCategoryModel> nodes;
@@ -30,15 +29,6 @@ public class ItemCategoryModel implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Integer getParentId() {
         return parentId;
     }
