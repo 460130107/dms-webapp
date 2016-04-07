@@ -114,7 +114,7 @@ define(function () {
 
     ngREST.factory("ItemCategoryAPI", ["$resource", function($resource){
         return $resource("/itemCategory/:id", { id:"@id" }, {
-            query:{ isArray:false},
+          //  query:{ isArray:false},
             update:{ method:"PUT", params:{id:"@id"}}
         });
     }]);
