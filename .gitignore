@@ -21,3 +21,7 @@ gen### Java template
 hs_err_pid*
 
 target
+/.settings
+/.classpath
+/.project
+/.gitignore
