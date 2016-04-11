@@ -147,9 +147,8 @@
                         </div>
                         <label class="col-md-2 control-label">公司/单位<span class="vaild">*</span></label>
                         <div class="col-md-4">
-                            <select ug-select2 style="width: 100%;" required="true" ng-model="member.company" name="company">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
+                            <select ug-select2 style="width: 100%;" required="true" ng-model="member.company" name="company" ng-repeat="company in companyList">
+                                <option value="company.id">company.companyName</option>
                             </select>
                         </div>
 					</div>

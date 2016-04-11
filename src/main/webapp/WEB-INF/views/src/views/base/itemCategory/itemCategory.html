@@ -91,7 +91,7 @@
 <script type="text/ng-template" id="tree_view.html">
 	<div ng-mouseenter="item.show=true" ng-mouseleave="item.show=false">
 		<span>
-			<i ng-if="item.nodes && item.nodes.length > 0" class="fa fa-lg fa-plus-circle"></i> {{item.name}}（{{item.description}}）
+			<i ng-if="item.nodes && item.nodes.length > 0" class="fa fa-lg fa-plus-circle"></i> {{item.name}}
 		</span>
 		<a href="javascript:void(0);" ng-show="item.show" ng-click="updateChildItemCategory(item)">修改</a>
 		<a ng-show="item.show" > | </a>
