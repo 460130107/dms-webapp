@@ -49,10 +49,10 @@ define(function () {
                     $scope.itemCategory = {};
                     if(CurrentItemCategory){
                         if(Action == 'ADD_CHILD_NODE'){
-                            $scope.organization.parentId = CurrentItemCategory.parentId;
-                            $scope.organization.parentName = CurrentItemCategory.parentName;
+                            $scope.itemCategory.parentId = CurrentItemCategory.parentId;
+                            $scope.itemCategory.parentName = CurrentItemCategory.parentName;
                         }else{
-                            $scope.organization = {
+                            $scope.itemCategory = {
                                 id:CurrentItemCategory.id,
                                 name:CurrentItemCategory.name,
                                 parentId:CurrentItemCategory.parentId,
