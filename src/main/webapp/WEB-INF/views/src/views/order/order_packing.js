@@ -133,6 +133,8 @@ define(function () {
             $scope.currentPackingBoxList = [];
             for (var i = 0; i < $scope.choosePackingOrders.length; i++) {
                 var obj = angular.copy($scope.choosePackingOrders[i]);
+                //装箱数默认为0
+                obj.boxNum = 0;
                 $scope.currentPackingBoxList.push(obj);
             }
             $scope.pageSetting.showPackingTask = true;
@@ -154,6 +156,8 @@ define(function () {
             }
             for (var i = 0; i < $scope.choosePackingOrders.length; i++) {
                 var obj = angular.copy($scope.choosePackingOrders[i]);
+                //装箱数默认为0
+                obj.boxNum = 0;
                 $scope.currentPackingBoxList.push(obj);
             }
             $scope.pageSetting.showPackingTask = true;
@@ -219,6 +223,7 @@ define(function () {
                 orderNo:$scope.currentPackingBoxList[index].orderNo
             }, function(data){
                 $scope.currentPackingBoxList[index].currentPacking = data;
+                $scope.currentPackingBoxList[index].boxNum = $scope.currentPackingBoxList[index].boxNum + 1;
             })
         };
         $scope.packingHistory = [];
@@ -226,18 +231,24 @@ define(function () {
         $scope.item = {};
         $scope.showPutBoxNum = null;
 
+        //多订单自动装箱
+        $scope.autoPackingList = function(){
+            $ugDialog.confirm("是否进行自动装箱?").then(function() {
+                for (var i = 0; i < $scope.currentPackingBoxList.length; i++) {
+                    $scope.autoPacking(i);
+                }
+            });
+        }
+
         // 自动装箱
         $scope.autoPacking = function(index){
             var packingInfo = $scope.currentPackingBoxList[index];
-            $ugDialog.confirm("是否进行自动装箱?").then(function(){
                 PackingAPI.autoScan({
                     orderNo:packingInfo.orderNo,
                     packingId:packingInfo.currentPacking.id
                 }, function(data){
-                    console.log(data);
                     $scope.getPackingOrderCountItemList();
                     $scope.getOrderList();
-                    $ugDialog.alert("自动装箱成功");
                     PackingAPI.getPackingOrderList({
                         limit:1,
                         offset:1,
@@ -245,11 +256,13 @@ define(function () {
                     }, function(data){
                         var oldBox = $scope.currentPackingBoxList[index];
                         $scope.currentPackingBoxList[index] = data.data[0];
+                        $scope.currentPackingBoxList[index].boxNum = 1;
                         $scope.currentPackingBoxList[index].currentPacking = oldBox.currentPacking;
+                        //打印订单
+                        $scope.printOrder($scope.currentPackingBoxList[index]);
                     });
                 })
-            })
-        };
+            };
 
         //扫描UPC码
         $scope.scanItemEvent = function(e){
