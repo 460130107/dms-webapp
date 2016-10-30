@@ -138,6 +138,7 @@ public class OrderService {
         tbOrder.setCreateUserId(createOrder.getCreateUserId());
         tbOrder.setManagerId(createOrder.getManagerId());
         tbOrder.setCompanyId(createOrder.getCompanyId());
+        tbOrder.setBatchNo(createOrder.getBatchNo());
         //生成收货码
 		TbOrderRef orderRef = new TbOrderRef();
 		orderRef.setOrderNo(orderNo);
@@ -173,6 +174,8 @@ public class OrderService {
         if(createOrder.getBatchNumber() == null){
             createOrder(createOrder);
         }else{
+        	//生成一个随机批次号
+        	createOrder.setBatchNo(String.valueOf((int)((Math.random()*9+1)*100000)));
             for (int i = 0; i < createOrder.getBatchNumber(); i++) {
                 createOrder(createOrder);
             }

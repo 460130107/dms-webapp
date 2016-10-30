@@ -171,5 +171,7 @@ class OrderModel implements Serializable {
      * 总箱数
      */
     private List<PackingModel> packingModels;
+    
+    private String batchNo;
      
 }
