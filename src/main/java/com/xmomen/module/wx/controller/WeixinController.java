@@ -43,6 +43,7 @@ public class WeixinController {
 
         if (StringUtilsExt.isEmpty(echostr)) {
             try {
+            	 log.info("请求服务器");
                 //设置response字符串格式为UTF-8
                 response.setCharacterEncoding("utf-8");
 
