@@ -112,7 +112,7 @@ public class WeixinController {
             return false;
         }
         if (StringUtilsExt.isEmpty(token)) {
-            log.error("请在微信对接接口地址中设定publicUid参数。");
+            log.error("请在微信对接接口地址中设定token参数。");
             return false;
         }
 
