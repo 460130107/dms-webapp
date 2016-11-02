@@ -133,8 +133,8 @@ define(function () {
             $scope.currentPackingBoxList = [];
             for (var i = 0; i < $scope.choosePackingOrders.length; i++) {
                 var obj = angular.copy($scope.choosePackingOrders[i]);
-                //装箱数默认为0
-                obj.boxNum = 0;
+                //装箱数默认为1
+                obj.boxNum = 1;
                 $scope.currentPackingBoxList.push(obj);
             }
             $scope.pageSetting.showPackingTask = true;
@@ -156,8 +156,8 @@ define(function () {
             }
             for (var i = 0; i < $scope.choosePackingOrders.length; i++) {
                 var obj = angular.copy($scope.choosePackingOrders[i]);
-                //装箱数默认为0
-                obj.boxNum = 0;
+                //装箱数默认为1
+                obj.boxNum = 1;
                 $scope.currentPackingBoxList.push(obj);
             }
             $scope.pageSetting.showPackingTask = true;
@@ -457,7 +457,7 @@ define(function () {
                 var LODOP=getLodop();
                 for(i=0;i<boxSize;i++){
                     LODOP.PRINT_INITA(0,0,"100.81mm","74.61mm","打印订单");
-                    LODOP.ADD_PRINT_BARCODE(23,266,43,43,"QRCode",order.orderNo);
+                    LODOP.ADD_PRINT_BARCODE(23,266,43,43,"QRCode",order.orderNo+"&www.fygl.ehoyuan.cn/bind/auth?url=/wx/receipt");
                     LODOP.ADD_PRINT_BARCODE(23,317,40,42,"QRCode","http://fygl.ehoyuan.cn/bind/auth?url=/wx/receipt&param="+order.orderNo);
                     LODOP.ADD_PRINT_BARCODE(99,23,"57.57mm","9.95mm","128Auto",order.orderNo);
                     LODOP.ADD_PRINT_TEXT(100,254,95,26,order.consigneeName);
@@ -488,13 +488,18 @@ define(function () {
                     LODOP.SET_PRINT_STYLEA(0,"FontName","黑体");
                     LODOP.SET_PRINT_STYLEA(0,"FontSize",6);
                     var currentBox = i +1;
-                    LODOP.ADD_PRINT_TEXT(237,283,85,35,currentBox + "/" + boxSize);
+                    if(result.batchNum > 0){
+                        LODOP.ADD_PRINT_TEXT(237,283,85,35,currentBox + "/" + boxSize+"/"+ result.batchNum);
+                    }else{
+                        LODOP.ADD_PRINT_TEXT(237,283,85,35,currentBox + "/" + boxSize);
+                    }
                     LODOP.SET_PRINT_STYLEA(0,"FontName","黑体");
                     LODOP.SET_PRINT_STYLEA(0,"FontSize",12);
                     LODOP.SET_PRINT_STYLEA(0,"Alignment",2);
                     LODOP.SET_PRINT_STYLEA(0,"Bold",1);
                     LODOP.ADD_PRINT_RECT(217,275,100,60,0,1);
-                    LODOP.PRINT();
+                    LODOP.PRINT_DESIGN();
+//                    LODOP.PRINT();
                 }
             });
         }

@@ -640,5 +640,9 @@
           order by st.TASK_STATUS,tb.order_no desc
     </select>
     
+    <select id="countBatchOrder" resultType="java.lang.Integer" parameterType="java.lang.String">
+    	select count(1) from tb_order where batch_no =#{batchNo}
+    </select>
+    
     
 </mapper>

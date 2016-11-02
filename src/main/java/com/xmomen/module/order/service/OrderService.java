@@ -55,6 +55,9 @@ public class OrderService {
         return (Page<OrderModel>) mybatisDao.selectPage(OrderMapper.ORDER_MAPPER_NAMESPACE + "getPackageTaskList", orderQuery, limit, offset);
     }
 
+    public int getCountBatch(String btachNo){
+        return mybatisDao.getSqlSessionTemplate().selectOne(OrderMapper.ORDER_MAPPER_NAMESPACE + "countBatchOrder",btachNo);
+    }
     
     /**
      * 查询订单

@@ -173,5 +173,8 @@ class OrderModel implements Serializable {
     private List<PackingModel> packingModels;
     
     private String batchNo;
+    
+    //每批次的订单数
+    private int batchNum;
      
 }
