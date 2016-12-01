@@ -2,7 +2,7 @@
  * Created by Jeng on 2016/1/8.
  */
 define(function () {
-    return ["$scope", "OrderAPI", "$modal", "$ugDialog", "UserAPI", "PackingAPI", function($scope, OrderAPI, $modal, $ugDialog, UserAPI, PackingAPI){
+    return ["$scope", "OrderAPI", "$modal", "$ugDialog", "UserAPI", "PackingAPI", "$timeout", function($scope, OrderAPI, $modal, $ugDialog, UserAPI, PackingAPI, $timeout){
         $scope.managers = [];
         $scope.getCustomerManagersList = function(){
             UserAPI.getCustomerManagerList({
@@ -10,7 +10,7 @@ define(function () {
             },function(data){
                 $scope.managers = data;
             });
-        }
+        };
         $scope.getCustomerManagersList();
 
         $scope.currentDate = function(date){
@@ -101,20 +101,28 @@ define(function () {
             });
         };
         $scope.bindPackingTask = function(index){
-            if(!$scope.currentCustomer.actorId){
-                $ugDialog.warn("请选择需要分配的责任人");
-                return;
+            if(!$scope.orderList[index].saveBtnLoading){
+                if(!$scope.currentCustomer.actorId){
+                    $ugDialog.warn("请选择需要分配的责任人");
+                    return;
+                }
+                var orderNos = [];
+                orderNos.push($scope.orderList[index].orderNo);
+                $scope.orderList[index].saveBtnLoading = true;
+                $timeout(function(){
+                    $scope.orderList[index].saveBtnLoading = false;
+                }, 5000);
+                //PackingAPI.bindPackingTask({
+                //    packingTaskUserId:$scope.currentCustomer.actorId,
+                //    orderNos:orderNos
+                //}, function(){
+                //    $scope.getOrderList();
+                //    $scope.getCustomerManagersList();
+                //}).$promise.then(function(){
+                //    $scope.orderList[index].saveBtnLoading = false;
+                //})
             }
-            var orderNos = [];
-            orderNos.push($scope.orderList[index].orderNo);
-            PackingAPI.bindPackingTask({
-                packingTaskUserId:$scope.currentCustomer.actorId,
-                orderNos:orderNos
-            }, function(){
-                $scope.getOrderList();
-                $scope.getCustomerManagersList();
-            })
-        };
+                    };
         $scope.unbindPackingTask = function(index){
             var orderNos = [];
             orderNos.push($scope.orderList[index].orderNo);
@@ -124,7 +132,7 @@ define(function () {
                 $scope.getOrderList();
                 $scope.getCustomerManagersList();
             })
-        }
+        };
         $scope.removePacking = function(index){
             $ugDialog.confirm("是否删除此装箱记录？").then(function(){
                 PackingAPI.delete({
